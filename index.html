@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Better PDF Editor - Functional</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <style>
+    body { font-family: Arial; text-align: center; padding: 20px; }
+    #pdfCanvas { border: 1px solid #ccc; margin-top: 20px; }
+    #tools { margin-top: 15px; }
+    button, select { margin: 5px; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Better PDF Editor - Functional</h1>
+  <input type="file" id="fileInput" accept=".pdf"><br>
+  <canvas id="pdfCanvas"></canvas><br>
+  <div id="tools">
+    <button onclick="addText()">Add Text</button>
+    <button onclick="addSignature()">Type Signature</button>
+    <button onclick="drawMode()">Draw</button>
+    <button onclick="insertImage()">Insert Image</button>
+    <button onclick="downloadPDF()">Download</button>
+    <br>
+    <select id="fontSelect">
+      <option>Arial</option>
+      <option>Pacifico</option>
+      <option>Great Vibes</option>
+      <option>Dancing Script</option>
+      <option>Satisfy</option>
+    </select>
+    <input type="color" id="colorPicker" value="#000000">
+  </div>
+  <script>
+    const canvas = document.getElementById('pdfCanvas');
+    const ctx = canvas.getContext('2d');
+    let pdfDoc = null, currentPage = 1, textLayer = [];
+
+    document.getElementById('fileInput').addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      const arrayBuffer = await file.arrayBuffer();
+      pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+      renderPage();
+    });
+
+    function renderPage() {
+      const page = pdfDoc.getPages()[0];
+      const { width, height } = page.getSize();
+      canvas.width = width;
+      canvas.height = height;
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, width, height);
+      textLayer.forEach(t => { ctx.font = t.size + "px " + t.font; ctx.fillStyle = t.color; ctx.fillText(t.text, t.x, t.y); });
+    }
+
+    function addText() {
+      const text = prompt("Enter text:");
+      if (!text) return;
+      textLayer.push({ text: text, x: 50, y: 50 + textLayer.length * 30, size: 24, color: document.getElementById('colorPicker').value, font: document.getElementById('fontSelect').value });
+      renderPage();
+    }
+
+    function addSignature() {
+      const sign = prompt("Type your signature:");
+      if (!sign) return;
+      textLayer.push({ text: sign, x: 50, y: 300 + textLayer.length * 20, size: 28, color: document.getElementById('colorPicker').value, font: document.getElementById('fontSelect').value });
+      renderPage();
+    }
+
+    function drawMode() {
+      let drawing = false;
+      canvas.onmousedown = e => { drawing = true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); };
+      canvas.onmousemove = e => { if (drawing) { ctx.lineTo(e.offsetX, e.offsetY); ctx.strokeStyle = document.getElementById('colorPicker').value; ctx.stroke(); } };
+      canvas.onmouseup = () => { drawing = false; };
+    }
+
+    function insertImage() {
+      const img = new Image();
+      img.src = prompt("Enter image URL:");
+      img.onload = () => { ctx.drawImage(img, 100, 100, 150, 100); };
+    }
+
+    async function downloadPDF() {
+      const newPdf = await PDFLib.PDFDocument.create();
+      const page = newPdf.addPage([canvas.width, canvas.height]);
+      const pngImage = await newPdf.embedPng(canvas.toDataURL("image/png"));
+      page.drawImage(pngImage, { x: 0, y: 0, width: canvas.width, height: canvas.height });
+      const pdfBytes = await newPdf.save();
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = "edited.pdf";
+      link.click();
+    }
+  </script>
+</body>
+</html>
