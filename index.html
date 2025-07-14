@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Better PDF Editor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="toolbar">
+    <button onclick="openPDF()">Choose PDF</button>
+    <button onclick="addText()">Add Text</button>
+    <button onclick="addSignature()">Add Signature</button>
+    <button onclick="insertImage()">Add Image</button>
+    <button onclick="drawMode()">Draw</button>
+    <button onclick="addShape()">Shapes</button>
+    <button onclick="undo()">Undo</button>
+    <button onclick="redo()">Redo</button>
+    <button onclick="addPage()">Add Page</button>
+    <button onclick="deletePage()">Delete Page</button>
+    <button onclick="createBlankPDF()">Start Blank</button>
+    <button onclick="downloadPDF()">Download</button>
+    <input type="color" id="colorPicker" value="#000000" />
+    <select id="fontSelect">
+      <option value="Arial">Arial</option>
+      <option value="Courier New">Courier New</option>
+      <option value="Times New Roman">Times New Roman</option>
+      <option value="Pacifico">Handwriting (Pacifico)</option>
+    </select>
+    <input type="number" id="fontSize" value="16" min="8" max="72" />
+  </div>
+
+  <canvas id="pdfCanvas"></canvas>
+  
+  <input type="file" id="fileInput" accept=".pdf, image/*" style="display:none;" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="editor.js"></script>
+</body>
+</html>
