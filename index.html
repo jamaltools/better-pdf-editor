@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Better PDF Editor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="toolbar">
+    <input type="file" id="fileInput" accept=".pdf" />
+    <button onclick="addText()">Text</button>
+    <button onclick="addImage()">Image</button>
+    <button onclick="addSignature()">Signature</button>
+    <button onclick="drawMode()">Draw</button>
+    <button onclick="addShape()">Shape</button>
+    <button onclick="insertLink()">Link</button>
+    <button onclick="undo()">Undo</button>
+    <button onclick="redo()">Redo</button>
+    <button onclick="addPage()">Add Page</button>
+    <button onclick="deletePage()">Delete Page</button>
+    <button onclick="savePDF()">Save PDF</button>
+  </div>
+
+  <canvas id="pdfCanvas"></canvas>
+
+  <script src="pdf-lib.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
