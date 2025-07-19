@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Better PDF Editor - Fast, Private, Sejda-like PDF editing directly in your browser. No uploads, no limits." />
+  <meta name="keywords" content="PDF Editor, Online PDF Editor, Edit PDF, Free PDF Editor, Sejda Alternative, PDF Text Edit, Sign PDF, PDF Tools" />
+  <meta name="author" content="EasyCalcHub.com" />
+  <title>Better PDF Editor - Edit PDF Fast & Free</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+  <!-- Icons (Open Source) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="pdf-editor-container">
+    <header class="editor-header">
+      <div class="logo">Better PDF Editor</div>
+      <div class="toolbar">
+        <button id="uploadBtn"><i class="fa fa-file-upload"></i> Upload PDF</button>
+        <button id="blankPdfBtn"><i class="fa fa-file"></i> Blank PDF</button>
+        <button id="saveBtn"><i class="fa fa-save"></i> Save PDF</button>
+        <button id="undoBtn"><i class="fa fa-undo"></i> Undo</button>
+        <button id="redoBtn"><i class="fa fa-redo"></i> Redo</button>
+      </div>
+    </header>
+
+    <div class="editor-body">
+      <aside class="sidebar">
+        <button class="tool-btn" data-tool="text"><i class="fa fa-font"></i> Text</button>
+        <button class="tool-btn" data-tool="sign"><i class="fa fa-signature"></i> Sign</button>
+        <button class="tool-btn" data-tool="draw"><i class="fa fa-pencil"></i> Draw</button>
+        <button class="tool-btn" data-tool="image"><i class="fa fa-image"></i> Image</button>
+        <button class="tool-btn" data-tool="shape"><i class="fa fa-shapes"></i> Shapes</button>
+        <button class="tool-btn" data-tool="link"><i class="fa fa-link"></i> Link</button>
+        <button class="tool-btn" data-tool="annotate"><i class="fa fa-highlighter"></i> Annotate</button>
+        <button class="tool-btn" data-tool="findreplace"><i class="fa fa-search"></i> Find/Replace</button>
+        <button class="tool-btn" data-tool="whiteout"><i class="fa fa-eraser"></i> Whiteout</button>
+      </aside>
+
+      <main class="editor-main">
+        <div id="pdf-preview" class="pdf-preview"></div>
+        <canvas id="pdf-canvas"></canvas>
+      </main>
+    </div>
+
+    <input type="file" id="fileInput" accept=".pdf" hidden />
+  </div>
+
+  <!-- Scripts -->
+  <script src="pdf.js"></script>
+  <script src="pdf-lib.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

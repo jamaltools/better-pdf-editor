@@ -1,0 +1,124 @@
+/* Better PDF Editor - Style */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: #f4f4f4;
+  color: #333;
+}
+
+#pdf-editor-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Header Toolbar */
+.editor-header {
+  background: #005bbb;
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editor-header .logo {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.toolbar button {
+  background: #fff;
+  color: #005bbb;
+  border: none;
+  padding: 8px 12px;
+  margin: 0 5px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.toolbar button:hover {
+  background: #e3e3e3;
+}
+
+/* Editor Body */
+.editor-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Sidebar Tools */
+.sidebar {
+  width: 200px;
+  background: #fff;
+  border-right: 1px solid #ccc;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .tool-btn {
+  background: #f8f8f8;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.sidebar .tool-btn:hover {
+  background: #eaeaea;
+}
+
+.sidebar .tool-btn i {
+  margin-right: 8px;
+}
+
+/* Main Editor Canvas */
+.editor-main {
+  flex: 1;
+  position: relative;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#pdf-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+}
+
+#pdf-canvas {
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 80px;
+  }
+
+  .sidebar .tool-btn {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .toolbar button {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  .editor-header .logo {
+    font-size: 16px;
+  }
+}
